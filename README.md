@@ -42,3 +42,14 @@ grid-inspector/
 └── benchmarks/              Reproducible latency, throughput, and power measurements
     └── results/             Committed benchmark output: CSVs, plots, and analysis notes
 ```
+
+## Roadmap
+
+The project is being built in phased blocks. Each phase produces a committed, reproducible artefact before the next phase begins.
+
+- **Phase 0 — Repository skeleton and scoping.** `[Complete]` Repository structure, problem framing, hardware target, and engineering logbook in place.
+- **Phase 1 — Dataset preparation.** `[In progress]` Unifying public transmission-inspection datasets into a common five-class schema covering intact insulators, missing insulator components, broken conductor strands, composite insulator surface degradation, and fittings and hardware defects.
+- **Phase 2 — Baseline model training.** `[Planned]` Train a YOLO-family object detector on the unified dataset using a cloud GPU. Publish training configuration, checkpoints, and honest failure analysis.
+- **Phase 3 — Edge conversion and deployment.** `[Planned]` Export the trained model to ONNX, build an INT8-calibrated TensorRT engine, and run inference on the Jetson Orin NX target. Publish latency, throughput, and power measurements.
+- **Phase 4 — Integration.** `[Planned]` Wrap the detection pipeline behind an MQTT publisher and an OPC-UA server so results can be consumed by common industrial data platforms. Web dashboard for review.
+- **Phase 5 — UK evaluation.** `[Planned]` Hand-label a small UK-specific evaluation set covering domestic asset types and conditions, and measure real-world performance against the baseline trained on international training data. Document the domain gap.
