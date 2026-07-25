@@ -1,2 +1,3 @@
 # grid-inspector
-Real-time identification of asset defects on edge devices, a reference implementation for UK energy network use cases.
+
+Reference implementation of a real-time defect detection system for UK transmission networks, running on Jetson-class edge AI hardware.
