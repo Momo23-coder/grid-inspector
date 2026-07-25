@@ -53,3 +53,13 @@ The project is being built in phased blocks. Each phase produces a committed, re
 - **Phase 3 — Edge conversion and deployment.** `[Planned]` Export the trained model to ONNX, build an INT8-calibrated TensorRT engine, and run inference on the Jetson Orin NX target. Publish latency, throughput, and power measurements.
 - **Phase 4 — Integration.** `[Planned]` Wrap the detection pipeline behind an MQTT publisher and an OPC-UA server so results can be consumed by common industrial data platforms. Web dashboard for review.
 - **Phase 5 — UK evaluation.** `[Planned]` Hand-label a small UK-specific evaluation set covering domestic asset types and conditions, and measure real-world performance against the baseline trained on international training data. Document the domain gap.
+
+## Getting started
+
+Installation, environment setup, and reproduction instructions will be added incrementally as each phase produces a runnable artefact. The intended structure:
+
+- **Training environment.** A `training/environment.yml` (or `requirements.txt`) will define the Python dependencies for reproducing model training on a CUDA-capable GPU.
+- **Conversion environment.** A `conversion/` script pipeline will document the ONNX export and TensorRT engine build steps for the Jetson Orin NX target.
+- **Runtime environment.** A `deepstream/` configuration will document the runtime pipeline for real-time inference on the iBox-600.
+
+At the current phase, the repository contains project scoping, hardware target documentation, and the folder structure for the phased build-out. See the [roadmap](#roadmap) for what lands when.
