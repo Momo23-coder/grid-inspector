@@ -63,3 +63,21 @@ Installation, environment setup, and reproduction instructions will be added inc
 - **Runtime environment.** A `deepstream/` configuration will document the runtime pipeline for real-time inference on the iBox-600.
 
 At the current phase, the repository contains project scoping, hardware target documentation, and the folder structure for the phased build-out. See the [roadmap](#roadmap) for what lands when.
+
+## Documentation
+
+Deeper writeups live in `docs/`:
+
+- **Problem statement.** Sector context, regulatory drivers, and the specific gap this project addresses. *(planned, Phase 1)*
+- **Dataset strategy.** Public dataset landscape, unified schema design, and the three-tier training approach. *(planned, Phase 1)*
+- **Baseline results.** Trained model performance, confusion matrix, and honest failure analysis. *(planned, Phase 2)*
+- **Deployment benchmarks.** Latency, throughput, and power measurements on the Jetson Orin NX target. *(planned, Phase 3)*
+- **Engineering logbook.** Session-by-session build notes documenting design decisions and problems encountered. `docs/logbook.md`
+
+## License
+
+Released under the [MIT License](LICENSE). Use, modify, and adapt freely with attribution.
+
+## Disclaimer
+
+This project is developed independently by the author as a personal engineering reference. It is not affiliated with, endorsed by, or representative of any employer or hardware vendor. All hardware specifications and technical claims are drawn from publicly available documentation.
