@@ -23,3 +23,22 @@ The reference deployment platform for this project is the Sintrones iBox-600, a 
 | Power envelope   | 10–25 W configurable                              |
 | Operating system | NVIDIA JetPack 6.x (Ubuntu 22.04)                 |
 | Runtime stack    | TensorRT, DeepStream SDK, GStreamer               |
+
+## Repository structure
+
+```
+grid-inspector/
+├── docs/                    Problem statement, dataset strategy, results, and engineering logbook
+├── datasets/                Scripts that download and prepare public datasets into a unified schema
+│   └── uk_eval_set/         Hand-labelled UK evaluation frames used to measure real-world performance
+├── training/                Model training code and configurations; runs on cloud GPU
+│   └── configs/             Training hyperparameters, dataset splits, augmentation settings
+├── conversion/              PyTorch to ONNX to TensorRT engine export scripts
+│   └── calibration/         INT8 calibration data used during TensorRT engine build
+├── deepstream/              Runtime inference pipeline on the Jetson Orin NX
+│   └── custom_bbox_parser/  Custom bounding box parser plugin for the trained model
+├── integration/             Downstream messaging, protocols, and dashboard
+│   └── dashboard/           Web dashboard for reviewing detections and system health
+└── benchmarks/              Reproducible latency, throughput, and power measurements
+    └── results/             Committed benchmark output: CSVs, plots, and analysis notes
+```
