@@ -24,3 +24,13 @@
 - Removed specific RIIO cycle names and publication dates to avoid unverifiable claims; kept the framework level explanation intact.
 - Updated the README documentation index to link the finished problem statement.
 - Next session: begin dataset preparation. Read the STN PLAD paper properly, inventory available public datasets, and draft docs/02_dataset_strategy.md before writing any code.
+
+## 2026-07-26 — Session 4: Dataset strategy drafted end to end
+
+- Wrote docs/02_dataset_strategy.md covering Overview, Public dataset inventory (InsPLAD, STN PLAD, CPLID, TLDD), per-dataset class mapping to the five-class schema, coverage summary, three-tier training approach, unified output format specification, and data quality practices.
+- Updated the primary backbone from STN PLAD to InsPLAD after verifying the current public dataset landscape; InsPLAD is now the strongest defect-labelled public source.
+- Named the honest coverage gap: Classes 3 (broken conductor strand) and 4 (composite insulator surface degradation) are not covered by any public dataset. Deferred to a later phase with a stated collection plan rather than dropped from the schema.
+- Specified the unified output format (COCO-style JSON with source_dataset and mapping_confidence fields) so the next scripts have clear conventions to build against.
+- Chose the multi-file converter pattern: one prepare_*.py per source dataset plus one unify_datasets.py.
+- Updated the README documentation index to link the finished dataset strategy.
+- Next session: begin writing datasets/prepare_cplid.py as the first converter. This introduces Python virtual environments and the first real code commits.
