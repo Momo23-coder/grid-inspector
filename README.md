@@ -69,7 +69,7 @@ At the current phase, the repository contains project scoping, hardware target d
 Deeper writeups live in `docs/`:
 
 - **Problem statement.** Sector context, regulatory drivers, and the specific gap this project addresses. *(planned, Phase 1)*
-- **Dataset strategy.** Public dataset landscape, unified schema design, and the three-tier training approach. *(planned, Phase 1)*
+- **Dataset strategy.** Public dataset landscape, unified schema design, and the three-tier training approach. [`docs/02_dataset_strategy.md`](docs/02_dataset_strategy.md)
 - **Baseline results.** Trained model performance, confusion matrix, and honest failure analysis. *(planned, Phase 2)*
 - **Deployment benchmarks.** Latency, throughput, and power measurements on the Jetson Orin NX target. *(planned, Phase 3)*
 - **Engineering logbook.** Session-by-session build notes documenting design decisions and problems encountered. `docs/logbook.md`
