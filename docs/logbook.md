@@ -16,3 +16,11 @@
 - Confirmed disclaimer language separating personal-project work from employer affiliation.
 - Committed each section as an atomic commit with a purposeful message.
 - Next session: begin Phase 1 — problem statement document in docs/, then dataset preparation.
+
+## 2026-07-26 — Session 3: Problem statement drafted end to end
+
+- Wrote docs/01_problem_statement.md covering Overview, UK network context (transmission and distribution structure including the post-2024 NESO split), Sector drivers (ESQCR, RIIO, ISO 55000, ENA specs at light citation depth), State of practice and the gap, Defect taxonomy (five class schema with inspection priority), Scope and non goals, References.
+- Consolidated the original eight section plan into five sections to keep the document proportionate to the project stage without losing the load bearing content.
+- Removed specific RIIO cycle names and publication dates to avoid unverifiable claims; kept the framework level explanation intact.
+- Updated the README documentation index to link the finished problem statement.
+- Next session: begin dataset preparation. Read the STN PLAD paper properly, inventory available public datasets, and draft docs/02_dataset_strategy.md before writing any code.
