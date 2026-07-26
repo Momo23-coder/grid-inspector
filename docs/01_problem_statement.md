@@ -41,13 +41,13 @@ Inspection of overhead infrastructure is not discretionary work. It is shaped by
 
 The core statutory obligation comes from the **Electricity Safety, Quality and Continuity Regulations 2002 (ESQCR)**, which places a duty on network operators to ensure their equipment is sufficient and maintained so as to prevent danger and interruption of supply. In practice, this obligation is discharged through structured inspection and maintenance programmes covering every asset class on the network.
 
-The economic framework in which this obligation is met is the **RIIO price control**, run by Ofgem. RIIO sets each operator's allowed revenue over multi-year periods and links it to performance on reliability, safety, environmental, and customer-service outputs, with separate cycles for transmission and for distribution. Under RIIO, operators are incentivised to invest in condition-based asset management rather than time-based replacement, which increases demand for high-quality asset condition data.
+The economic framework in which this obligation is met is the **RIIO price control**, run by Ofgem. RIIO sets each operator's allowed revenue over multi-year periods and links it to performance on reliability, safety, environmental, and customer service outputs, with separate cycles for transmission and for distribution. Under RIIO, operators are incentivised to invest in condition based asset management rather than time based replacement, which increases demand for high-quality asset condition data.
 
 Asset management practice itself is shaped by the **ISO 55000** family of standards, which formalise how organisations should plan, deliver, and continually improve the management of physical assets over their lifecycle. UK network operators align their asset management systems to ISO 55001, which requires evidence-based decisions on inspection frequency, defect classification, and intervention priority.
 
 Finally, the technical detail of what inspection looks like on the ground is codified in the **Energy Networks Association (ENA) Engineering Recommendations**, a suite of industry-agreed standards covering overhead line design, condition assessment, and safety. The ENA specs are what a field crew or a contracted drone operator actually works to.
 
-Taken together, these four pillars — statutory duty, regulated revenue, asset-management standard, and industry-agreed technical practice — create sustained, funded demand for better inspection data. The gap this project addresses sits inside that demand.
+Taken together, these four pillars; statutory duty, regulated revenue, asset-management standard, and industry-agreed technical practice  create sustained, funded demand for better inspection data. The gap this project addresses sits inside that demand.
 
 ## State of practice and the gap
 
@@ -57,11 +57,11 @@ The dominant bottleneck is no longer image capture. Drone and helicopter platfor
 
 Three specific gaps result from this. First, there is no open, reproducible reference showing how a modern defect-detection pipeline should be constructed on edge AI hardware suitable for in-vehicle or on-drone deployment. Second, the public academic datasets that do exist are drawn largely from non-UK networks, with asset types, hardware fittings, and weathering patterns that differ from UK conditions in ways that are known to degrade model performance. Third, the industry lacks a common defect taxonomy and evaluation protocol against which vendor claims can be independently compared.
 
-This project addresses the first gap directly, contributes toward closing the second through a UK-focused evaluation set, and provides a starting point for the third through a documented five-class defect schema.
+This project addresses the first gap directly, contributes toward closing the second through a UK focused evaluation set, and provides a starting point for the third through a documented five class defect schema.
 
 ## Defect taxonomy
 
-The project trains and evaluates against a five-class schema covering the most safety-relevant and inspection-actionable defect categories on overhead transmission and distribution assets.
+The project trains and evaluates against a five class schema covering the most safety-relevant and inspection-actionable defect categories on overhead transmission and distribution assets.
 
 | Class | Description | Inspection priority |
 | ----- | ----------- | ------------------- |
@@ -82,7 +82,7 @@ This project is a reference implementation of the machine-learning stage of an i
 - Asset registry integration or work order management
 - Any claim of production-readiness or fitness for use on a live UK network
 
-What is in scope: an end-to-end, reproducible, documented pipeline from public dataset ingestion through model training and edge deployment to real-time inference on Jetson-class hardware, evaluated against a UK-focused test set.
+What is in scope: an end-to-end, reproducible, documented pipeline from public dataset ingestion through model training and edge deployment to real-time inference on Jetson hardware, evaluated against a UK focused test set.
 
 ## References
 
