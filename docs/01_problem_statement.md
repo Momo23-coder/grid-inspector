@@ -87,7 +87,7 @@ What is in scope: an end-to-end, reproducible, documented pipeline from public d
 ## References
 
 - Electricity Safety, Quality and Continuity Regulations 2002 (SI 2002/2665), UK Statutory Instrument.
-- - Ofgem, RIIO price control documents (transmission and distribution).
+- Ofgem, RIIO price control documents (transmission and distribution).
 - ISO 55000:2014, *Asset management — Overview, principles and terminology*, and ISO 55001:2014, *Asset management — Management systems — Requirements*.
 - Energy Networks Association, *Engineering Recommendations* (various), published by ENA.
 - Vieira-e-Silva, A. L. B. et al., *STN PLAD: A Dataset for Multi-Size Power Line Assets Detection in High-Resolution UAV Images*, 2021 (source for baseline public dataset).
