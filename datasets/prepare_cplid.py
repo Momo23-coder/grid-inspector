@@ -15,6 +15,7 @@ Run:
 
 from pathlib import Path
 
+
 # ---------------------------------------------------------------------------
 # Paths
 # ---------------------------------------------------------------------------
@@ -35,6 +36,7 @@ DEFECTIVE_IMAGES_DIR = CPLID_ROOT / "Defective_Insulators" / "images"
 # Output location — the unified schema JSON for this dataset
 OUTPUT_DIR = PROJECT_ROOT / "datasets" / "unified"
 OUTPUT_JSON = OUTPUT_DIR / "cplid.json"
+
 
 def main() -> None:
     """Entry point. Prints resolved paths for verification."""
