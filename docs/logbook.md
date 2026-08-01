@@ -44,4 +44,6 @@
 - Created datasets/prepare_cplid.py scaffold with module docstring, main function, and entry-point guard. Ran clean.
 - Added path configuration constants at the top of the script, using Path(__file__).resolve().parent.parent to resolve project root regardless of run location.
 - Verified all input paths exist on disk before writing any parsing code.
-- Next session: write the XML parsing function, test on the sample files (Normal_Insulators/labels/0049.xml and Defective_Insulators/labels/defect/000.xml), then move to file walking and class mapping.
+- Inspected sample images from both Normal_Insulators and Defective_Insulators folders before writing the converter. Confirmed visually that CPLID defective images are digital composites (real insulator crops pasted onto real backgrounds via U-Net segmentation, per the paper's methodology).
+- Made an informed schema decision as a result: added a `synthetic: true` boolean flag to the unified output format spec, applied to CPLID defect annotations. Updated docs/02_dataset_strategy.md to document the new field.
+- Next session: write the XML parsing function in prepare_cplid.py. Test against 0049.xml (normal) and 000.xml (defective defect). Then file walking, class mapping, and JSON output.
