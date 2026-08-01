@@ -102,6 +102,7 @@ All source datasets are converted to a single unified format before training. Th
 - **Category IDs 1 to 5** correspond to the five schema classes in the order defined in `01_problem_statement.md`
 - **A `source_dataset` field** on each annotation records the origin dataset so provenance can be traced back through the pipeline
 - **A `mapping_confidence` field** on each annotation records whether the mapping was `clean`, `with_caveats`, or `intact_reference`, allowing training scripts to weight or filter samples if needed
+- **A `synthetic` boolean flag** is set to `true` on annotations where the underlying imagery was created by digital compositing rather than captured in the field. Currently applies to CPLID defect annotations. Downstream training and evaluation scripts can filter on this flag when reporting real-world versus synthetic performance.
 - **Image paths remain as relative references** to source imagery; the imagery itself is not committed to the repository (see licence note above)
 
 Preparation scripts under `datasets/` implement one converter per source dataset (`prepare_cplid.py`, `prepare_stnplad.py`, `prepare_insplad.py`, `prepare_tldd.py`) and one unification script (`unify_datasets.py`) that merges the converter outputs into a single training-ready manifest.
