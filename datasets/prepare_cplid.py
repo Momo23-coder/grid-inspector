@@ -350,15 +350,26 @@ def walk_defective_defects() -> WalkResult:
     return result
 
 def main() -> None:
-    """Entry point. Prints resolved paths for verification."""
+    """Entry point. Walks both CPLID subfolders and prints combined summary."""
     print("prepare_cplid: starting")
-    print(f"  PROJECT_ROOT: {PROJECT_ROOT}")
-    print(f"  CPLID_ROOT: {CPLID_ROOT}")
-    print(f"  NORMAL_LABELS_DIR: {NORMAL_LABELS_DIR}")
-    print(f"    exists: {NORMAL_LABELS_DIR.exists()}")
-    print(f"  DEFECTIVE_DEFECT_LABELS_DIR: {DEFECTIVE_DEFECT_LABELS_DIR}")
-    print(f"    exists: {DEFECTIVE_DEFECT_LABELS_DIR.exists()}")
-    print(f"  OUTPUT_JSON: {OUTPUT_JSON}")
+
+    normal_result = walk_normal_insulators()
+    print()
+    defective_result = walk_defective_defects()
+    print()
+
+    total_annotations = len(normal_result.annotations) + len(defective_result.annotations)
+    total_processed = normal_result.files_processed + defective_result.files_processed
+    total_failed = normal_result.files_failed + defective_result.files_failed
+    total_skipped = normal_result.files_skipped_no_objects + defective_result.files_skipped_no_objects
+
+    print("Combined summary:")
+    print(f"  Files processed: {total_processed}")
+    print(f"  Files failed:    {total_failed}")
+    print(f"  Files skipped:   {total_skipped}")
+    print(f"  Annotations:     {total_annotations}")
+    print(f"    Class 1 (Intact insulator):    {len(normal_result.annotations)}")
+    print(f"    Class 2 (Missing cap or shed): {len(defective_result.annotations)}")
 
 
 if __name__ == "__main__":
