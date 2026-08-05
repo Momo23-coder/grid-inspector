@@ -109,6 +109,18 @@ class CplidSourceKind(Enum):
     DEFECTIVE_DEFECTS = "defective_defects"    
 
 
+@dataclass
+class WalkResult:
+    """Aggregated output from walking one CPLID subfolder.
+
+    Bundles the produced annotations with counts that let ``main`` print
+    a per-folder summary without recomputing statistics from the list.
+    """
+
+    annotations: list[UnifiedAnnotation] = field(default_factory=list)
+    files_processed: int = 0
+    files_failed: int = 0
+    files_skipped_no_objects: int = 0
 # ---------------------------------------------------------------------------
 # XML parsing
 # ---------------------------------------------------------------------------
