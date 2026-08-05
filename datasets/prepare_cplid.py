@@ -69,6 +69,31 @@ class VocAnnotation:
     objects: list[VocObject] = field(default_factory=list)
 
 
+# Category IDs from the unified five-class schema. Kept as module-level
+# constants so mapping code reads as CATEGORY_INTACT_INSULATOR rather than
+# a bare integer literal.
+
+CATEGORY_INTACT_INSULATOR = 1
+CATEGORY_MISSING_CAP_OR_SHED = 2
+CATEGORY_BROKEN_CONDUCTOR_STRAND = 3
+CATEGORY_COMPOSITE_SURFACE_DEGRADATION = 4
+CATEGORY_FITTINGS_AND_HARDWARE = 5
+
+
+@dataclass
+class UnifiedAnnotation:
+    """One annotation in the project's unified five-class schema.
+
+    Corresponds to one bounding box in one image. Multiple annotations
+    per image are allowed; each carries its own category and provenance.
+    """
+
+    image_id: str
+    source_dataset: str
+    category_id: int
+    bbox_xyxy: tuple[int, int, int, int]
+    mapping_confidence: str
+    synthetic: bool = False
 # ---------------------------------------------------------------------------
 # XML parsing
 # ---------------------------------------------------------------------------
