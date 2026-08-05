@@ -55,3 +55,12 @@
 - Tested the parser against real sample files (data/cplid/Normal_Insulators/labels/0049.xml and data/cplid/Defective_Insulators/labels/defect/000.xml). Both parses produced output matching the source XML exactly.
 - Reordered module sections to follow the constants → data → functions convention. Fixed PEP 8 blank-line spacing between top-level blocks.
 - Next session: write the class mapping logic — the function that takes a parsed VocAnnotation and produces annotations in the five-class unified schema, including the synthetic flag for CPLID defect samples.
+
+## 2026-08-03 — Session 7: Class mapping — UnifiedAnnotation, CplidSourceKind, voc_to_unified
+
+- Added UnifiedAnnotation dataclass matching the output-format spec in docs/02_dataset_strategy.md. Includes optional synthetic flag defaulting to False.
+- Added five module-level CATEGORY_* constants naming the schema classes so mapping code reads as CATEGORY_INTACT_INSULATOR rather than bare integers.
+- Added CplidSourceKind enum with NORMAL_INSULATORS and DEFECTIVE_DEFECTS members. Verified typo-safety: accessing a non-existent member raises AttributeError immediately.
+- Added voc_to_unified function using a Python match statement to branch on source kind. Emits warnings.warn (with stacklevel=2) on unexpected object names rather than crashing.
+- Verified end-to-end on both sample files: Normal_Insulators/0049.xml → one Class 1 annotation with clean/synthetic=False; Defective_Insulators/defect/000.xml → one Class 2 annotation with with_caveats/synthetic=True. All fields match the strategy doc specification exactly.
+- Next session: file walking. Write functions that iterate over the whole Normal_Insulators/labels/ and Defective_Insulators/labels/defect/ folders, parse and map each file, and produce a combined list of UnifiedAnnotation instances.
