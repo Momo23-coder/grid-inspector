@@ -14,6 +14,7 @@ Run:
 """
 
 from dataclasses import dataclass, field
+from enum import Enum
 from pathlib import Path
 
 from lxml import etree
@@ -94,6 +95,19 @@ class UnifiedAnnotation:
     bbox_xyxy: tuple[int, int, int, int]
     mapping_confidence: str
     synthetic: bool = False
+
+class CplidSourceKind(Enum):
+    """Which subset of CPLID an annotation was loaded from.
+
+    The same class string (``insulator``) means different things depending
+    on which folder the XML came from. This enum makes the source explicit
+    at the mapping-function boundary rather than inferring it from paths.
+    """
+
+    NORMAL_INSULATORS = "normal_insulators"
+    DEFECTIVE_DEFECTS = "defective_defects"    
+
+    
 # ---------------------------------------------------------------------------
 # XML parsing
 # ---------------------------------------------------------------------------
