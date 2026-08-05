@@ -239,6 +239,62 @@ def voc_to_unified(
 
     return unified
 
+
+# ---------------------------------------------------------------------------
+# File walking
+# ---------------------------------------------------------------------------
+# Iterates over every XML file in a CPLID subfolder, parsing each and mapping
+# its objects to unified schema. Individual file failures are logged but do
+# not abort the walk; overall counters are returned alongside the annotations.
+
+
+def walk_normal_insulators() -> WalkResult:
+    """Walk Normal_Insulators/labels/ and produce Class 1 annotations.
+
+    Every XML file in the folder is parsed, mapped through
+    ``voc_to_unified`` with source kind ``NORMAL_INSULATORS``, and its
+    resulting annotations added to the returned ``WalkResult``. Files
+    that raise an exception during parsing are logged as failures.
+
+    Returns:
+        A ``WalkResult`` bundling the produced annotations with counts
+        for processed, failed, and empty files.
+    """
+    print(f"Walking Normal_Insulators from {NORMAL_LABELS_DIR}")
+    result = WalkResult()
+
+    xml_files = sorted(NORMAL_LABELS_DIR.glob("*.xml"))
+    total = len(xml_files)
+    print(f"  Found {total} XML files")
+
+    for i, xml_path in enumerate(xml_files, start=1):
+        image_id = f"cplid_normal_{xml_path.stem}"
+
+        try:
+            voc_ann = parse_voc_xml(xml_path)
+            unified = voc_to_unified(voc_ann, CplidSourceKind.NORMAL_INSULATORS, image_id)
+        except Exception as e:
+            warnings.warn(f"Failed to process {xml_path.name}: {e}", stacklevel=2)
+            result.files_failed += 1
+            continue
+
+        result.files_processed += 1
+        if not unified:
+            result.files_skipped_no_objects += 1
+        else:
+            result.annotations.extend(unified)
+
+        if i % 100 == 0:
+            print(f"  Processed {i}/{total} files, {len(result.annotations)} annotations so far")
+
+    print(
+        f"  Done. {result.files_processed} processed, "
+        f"{result.files_failed} failed, "
+        f"{result.files_skipped_no_objects} yielded no annotations. "
+        f"{len(result.annotations)} annotations total."
+    )
+    return result
+    
 def main() -> None:
     """Entry point. Prints resolved paths for verification."""
     print("prepare_cplid: starting")
