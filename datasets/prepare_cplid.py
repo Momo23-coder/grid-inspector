@@ -13,6 +13,7 @@ Run:
     python datasets/prepare_cplid.py
 """
 
+import warnings
 from dataclasses import dataclass, field
 from enum import Enum
 from pathlib import Path
@@ -107,7 +108,7 @@ class CplidSourceKind(Enum):
     NORMAL_INSULATORS = "normal_insulators"
     DEFECTIVE_DEFECTS = "defective_defects"    
 
-    
+
 # ---------------------------------------------------------------------------
 # XML parsing
 # ---------------------------------------------------------------------------
@@ -159,6 +160,72 @@ def parse_voc_xml(xml_path: Path) -> VocAnnotation:
         objects=objects,
     )
 
+
+# ---------------------------------------------------------------------------
+# Class mapping
+# ---------------------------------------------------------------------------
+# Translates parsed VOC annotations into the project's five-class unified
+# schema. Class mapping decisions and their rationale live in
+# docs/02_dataset_strategy.md; this code is the executable form of that
+# document's per-dataset mapping table.
+
+
+def voc_to_unified(
+    voc_ann: VocAnnotation,
+    source_kind: CplidSourceKind,
+    image_id: str,
+) -> list[UnifiedAnnotation]:
+    """Map a parsed VOC annotation to unified-schema annotations.
+
+    Applies the CPLID class mapping from docs/02_dataset_strategy.md.
+    Objects with an unexpected class name for their source folder are
+    skipped and a warning is emitted; parsing continues on the rest.
+
+    Args:
+        voc_ann: The parsed VOC annotation.
+        source_kind: Which CPLID subfolder the annotation came from.
+        image_id: Unique identifier for the source image, used in the
+            output annotation's ``image_id`` field.
+
+    Returns:
+        A list of ``UnifiedAnnotation`` instances. May be empty if all
+        objects were unexpected for the source.
+    """
+    match source_kind:
+        case CplidSourceKind.NORMAL_INSULATORS:
+            expected_name = "insulator"
+            category_id = CATEGORY_INTACT_INSULATOR
+            mapping_confidence = "clean"
+            synthetic = False
+        case CplidSourceKind.DEFECTIVE_DEFECTS:
+            expected_name = "defect"
+            category_id = CATEGORY_MISSING_CAP_OR_SHED
+            mapping_confidence = "with_caveats"
+            synthetic = True
+
+    unified: list[UnifiedAnnotation] = []
+    for obj in voc_ann.objects:
+        if obj.name != expected_name:
+            warnings.warn(
+                f"Unexpected object name {obj.name!r} in {image_id} "
+                f"from source {source_kind.value}; expected {expected_name!r}. "
+                f"Skipping.",
+                stacklevel=2,
+            )
+            continue
+
+        unified.append(
+            UnifiedAnnotation(
+                image_id=image_id,
+                source_dataset="CPLID",
+                category_id=category_id,
+                bbox_xyxy=(obj.xmin, obj.ymin, obj.xmax, obj.ymax),
+                mapping_confidence=mapping_confidence,
+                synthetic=synthetic,
+            )
+        )
+
+    return unified
 
 def main() -> None:
     """Entry point. Prints resolved paths for verification."""
